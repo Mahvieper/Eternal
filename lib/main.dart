@@ -38,6 +38,8 @@ class _MyAppState extends State<MyApp> {
   String urlType = "";
   bool isLoading = false;
 
+
+  //Method to call the API.
   Future<EternalResponse> createPost(Eternal post, String urlType) async {
     final response = await http
         .post(urlPost + urlType, body: {'url': post.url, 'text': post.text});
@@ -50,6 +52,8 @@ class _MyAppState extends State<MyApp> {
     return EternalResponse.fromJson(jsonData);
   }
 
+
+  //To Show Alert Dialog when there is an Invalid URL or TWEET.
   void _showAlertDialog(BuildContext context) {
     final alert = AlertDialog(
       title: Text("Error"),
@@ -166,13 +170,10 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
-    const textStyleBold = const TextStyle(fontWeight: FontWeight.bold);
+    const textStyleBold = const TextStyle(fontWeight: FontWeight.normal);
     return SafeArea(
       child: Scaffold(
           resizeToAvoidBottomInset: false,
-      /*  appBar: AppBar(
-          title: const Text('Plugin example app'),
-        ),*/
         body: Stack(
           children: [
             Container(
@@ -210,7 +211,7 @@ class _MyAppState extends State<MyApp> {
                   padding: EdgeInsets.all(20.0),
                   child: Text(
                       "CURRENT URL\n${(url.length > 50) ? url.substring(0, 50) + "..." : url}",style: TextStyle(fontSize : 15,color: Colors.white,fontFamily: "Rubik Bold",
-                    fontWeight: FontWeight.bold,
+                    fontWeight: FontWeight.normal,
                     ),),
                 ),
                 isLoading ? CircularProgressIndicator() : Container(),
@@ -279,17 +280,17 @@ class _MyAppState extends State<MyApp> {
                      // webView.loadUrl(url: myController.text.toString());
                     });
                   },
-                  child: Text("Submit",style: TextStyle(color: Colors.white,fontFamily: 'Rubik Bold',fontWeight: FontWeight.bold),),
+                  child: Text("Submit",style: TextStyle(color: Colors.white,fontFamily: 'Rubik Bold',fontWeight: FontWeight.normal),),
                 ),
               //  SizedBox(height: MediaQuery.of(context).size.height * 0.01,),
                 Text("SHARED URL or TEXT", style: TextStyle(color: Colors.white,fontFamily: "Rubik Bold",
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                 ),),
                // SizedBox(height: 20,),
                 Container(
                   margin: EdgeInsets.all(MediaQuery.of(context).size.height * 0.02),
                   child: Text(_sharedText ?? "", style: TextStyle(color: Colors.white,fontFamily: "Rubik Bold",
-                  fontWeight: FontWeight.bold,
+                  fontWeight: FontWeight.normal,
                   ),),
                 ),
                 SizedBox(
@@ -310,10 +311,6 @@ class _MyAppState extends State<MyApp> {
                         )),
                         onWebViewCreated: (InAppWebViewController controller) {
                           webView = controller;
-                          /*if(_sharedText !=null) {
-                          _sharedText !=null ? this.url = _sharedText : this.url = url;
-                          webView.loadUrl(url: _sharedText);
-                        }*/
                         },
                         onLoadStart:
                             (InAppWebViewController controller, String url) {
@@ -340,24 +337,6 @@ class _MyAppState extends State<MyApp> {
                 ButtonBar(
                   alignment: MainAxisAlignment.center,
                   children: <Widget>[
-               /*     RaisedButton(
-                      color : Color.fromRGBO(20, 121, 183, 1),
-                      child: Icon(Icons.arrow_back),
-                      onPressed: () {
-                        if (webView != null) {
-                          webView.goBack();
-                        }
-                      },
-                    ),
-                    RaisedButton(
-                      color : Color.fromRGBO(20, 121, 183, 1),
-                      child: Icon(Icons.arrow_forward),
-                      onPressed: () {
-                        if (webView != null) {
-                          webView.goForward();
-                        }
-                      },
-                    ),*/
                     RaisedButton(
                       color : Color.fromRGBO(20, 121, 183, 1),
                       child: Icon(Icons.refresh),
@@ -373,7 +352,7 @@ class _MyAppState extends State<MyApp> {
                   alignment: Alignment.bottomCenter,
                   child: RaisedButton(
                       color : Colors.blueAccent,
-                      child: Text(_isButtonDisabled ? "Hold on..." : "Share",style: TextStyle(color: Colors.white,fontFamily: 'Rubik Bold',fontWeight: FontWeight.bold),),
+                      child: Text(_isButtonDisabled ? "Hold on..." : "Share",style: TextStyle(color: Colors.white,fontFamily: 'Rubik Bold',fontWeight: FontWeight.normal),),
                       onPressed: _isButtonDisabled
                           ? null
                           : () async {
